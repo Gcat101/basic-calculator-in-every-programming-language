@@ -1,46 +1,57 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include <iostream>
 
 int main() {
-    printf("\n");
-
-    int first;
-    int second;
+    double first;
+    double second;
     char action;
-    int result;
+    double result;
 
-    printf("Input your first number: ");
-    if (scanf("%d", &first)==0) {
-        printf("Unknown number\n\n");
-        exit(1);
-    }
-    printf("Input your second number: ");
-    if (scanf("%d", &second)==0) {
-        printf("Unknown number\n\n");
-        exit(1);
+    while(true) {
+        std::cout << "Input your first number: ";
+        std::cin >> first;
+        if (std::cin.fail()) {
+            std::cin.clear(); std::cin.ignore();
+            std::cout << "Not a valid number!\n";
+        } else break;
     }
 
-    printf("What do you want to do (+|-|*|/): ");
-    scanf(" %c", &action);
-
-    switch (action)
-    {
-    case '+':
-        result=first+second;
-        break;
-    case '-':
-        result=first-second;
-        break;
-    case '*':
-        result=first*second;
-        break;
-    case '/':
-        result=first/second;
-        break;
-    default:
-        printf("Unknown action\n\n");
-        exit(1);
+    while(true) {
+        std::cout << "Input your second number: ";
+        std::cin >> second;
+        if (std::cin.fail()) {
+            std::cin.clear(); std::cin.ignore();
+            std::cout << "Not a valid number!\n";
+        } else break;
     }
 
-    printf("Result: %d\n\n", result);
+    while(true) {
+        std::cout << "What do you want to do? ( + | - | * | / ): ";
+        std::cin >> action;
+        if (std::cin.fail()) {
+            std::cin.clear(); std::cin.ignore();
+            std::cout << "Not a valid character!\n";
+        } 
+        else switch (action)
+        {
+        case '+':
+            result=first+second;
+            break;
+        case '-':
+            result=first-second;
+            break;
+        case '*':
+            result=first*second;
+            break;
+        case '/':
+            result=first/second;
+            break;
+        default:
+            std::cout << "Unknown action!\n";
+            continue;
+            break;
+        };
+        break;
+    }
+
+    std::cout << "Result: " << result << std::endl;
 }
